@@ -7,11 +7,11 @@ cat > README.md << 'EOF'
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-## 🎯 Project Overview
+🎯 Project Overview
 
 **Opti-Monitor** is a lightweight, automated server monitoring solution designed for small healthcare facilities. It provides real-time health monitoring, automatic alerting, and a beautiful web dashboard.
 
-### The Problem I Solved
+The Problem I Solved
 
 Small healthcare clinics often lack IT resources to monitor their critical systems. When servers crash:
 - 📅 Patient appointments are lost
@@ -19,7 +19,7 @@ Small healthcare clinics often lack IT resources to monitor their critical syste
 - 👨‍⚕️ Staff waste time troubleshooting
 - 😞 Patients have poor experiences
 
-### My Solution
+ My Solution
 
 An automated monitoring system that:
 - ✅ Checks server health every 5 minutes automatically
@@ -30,6 +30,6 @@ An automated monitoring system that:
 
 ---
 
-## 📸 Screenshots
 
-### Terminal Health Check
+
+ Terminal Health Check
