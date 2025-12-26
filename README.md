@@ -9,7 +9,7 @@ cat > README.md << 'EOF'
 
 🎯 Project Overview
 
-**Opti-Monitor** is a lightweight, automated server monitoring solution designed for small healthcare facilities. It provides real-time health monitoring, automatic alerting, and a beautiful web dashboard.
+Opti-Monitor is a lightweight, automated server monitoring solution designed for small healthcare facilities. It provides real-time health monitoring, automatic alerting, and a beautiful web dashboard.
 
 The Problem I Solved
 
