@@ -33,3 +33,32 @@ An automated monitoring system that:
 
 
  Terminal Health Check
+
+### Web Dashboard
+The dashboard shows:
+- Real-time CPU, Memory, and Disk metrics
+- Visual progress bars with color coding
+- System information
+- Recent health check history
+- Auto-refreshes every 60 seconds
+
+---
+
+## 🏗️ Architecture
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/opti-monitor.git
+cd opti-monitor
+
+# Run interactive menu
+./opti-monitor.sh
+
+# Or run individual commands:
+./scripts/health-check.sh      # Run health check
+./scripts/generate-dashboard.sh # Generate dashboard
+./scripts/setup-automation.sh   # Setup auto-monitoring
