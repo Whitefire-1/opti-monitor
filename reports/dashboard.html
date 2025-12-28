@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="60">
+    <title>👁️ Opti-Monitor Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a3e 50%, #0f0f1e 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #7c3aed, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .refresh-badge {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #00d4ff;
+            margin-top: 15px;
+        }
+        
+        /* Status Banner */
+        .status-banner {
+            background: #28a745;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .status-banner .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .status-banner h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .metric-card .icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .metric-card h3 {
+            color: #a0a0a0;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+.metric-card .value {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .metric-card .details {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .bar-green { background: linear-gradient(90deg, #28a745, #34ce57); }
+        .bar-yellow { background: linear-gradient(90deg, #ffc107, #ffda6a); }
+        .bar-red { background: linear-gradient(90deg, #dc3545, #f1aeb5); }
+        
+        /* System Info Card */
+        .system-info {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .system-info h3 {
+            color: #00d4ff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+.info-item .label {
+            color: #666;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .info-item .value {
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        /* Logs Section */
+        .logs-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .logs-section h3 {
+            color: #00d4ff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .log-entry {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            border-left: 4px solid;
+        }
+        
+        .log-healthy {
+            background: rgba(40, 167, 69, 0.1);
+            border-left-color: #28a745;
+        }
+        
+        .log-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: #ffc107;
+        }
+        
+        .log-critical {
+            background: rgba(220, 53, 69, 0.1);
+            border-left-color: #dc3545;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+        
+        footer p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .author-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #7c3aed, #00d4ff);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .metric-card .value {
+                font-size: 2.5em;
+            }
+        }
+ </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">👁️</div>
+            <h1>Opti-Monitor Dashboard</h1>
+            <p class="subtitle">Vision Care Eye Clinic - Server Health Monitoring</p>
+            <p class="timestamp">Last Updated: 2025-12-26 22:49:33</p>
+            <div class="refresh-badge">🔄 Auto-refreshes every 60 seconds</div>
+        </header>
+        
+        <div class="status-banner">
+            <div class="icon">✅</div>
+            <h2>All Systems Operational</h2>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="icon">💻</div>
+                <h3>CPU Usage</h3>
+                <div class="value">0%</div>
+                <div class="details">Processing power utilization</div>
+                <div class="progress-bar">
+                    <div class="progress-fill bar-green" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="icon">🧠</div>
+                <h3>Memory Usage</h3>
+                <div class="value">21%</div>
+                <div class="details">382MB used of 1806MB</div>
+                <div class="progress-bar">
+                    <div class="progress-fill bar-green" style="width: 21%"></div>
+                </div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="icon">💾</div>
+                <h3>Disk Usage</h3>
+                <div class="value">1%</div>
+                <div class="details">1.9G used of 1007G</div>
+                <div class="progress-bar">
+                    <div class="progress-fill bar-green" style="width: 1%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="system-info">
+            <h3>🖥️ System Information</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="label">Hostname</div>
+                    <div class="value">LAPTOP-DJFL8OAS</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">IP Address</div>
+                    <div class="value">172.17.128.230</div>
+                </div>
+ <div class="info-item">
+                    <div class="label">Uptime</div>
+                    <div class="value">up 15 hours, 57 minutes</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">Status</div>
+                    <div class="value">HEALTHY</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="logs-section">
+            <h3>📋 Recent Health Checks</h3>
+            <div class='log-entry log-healthy'>[2025-12-26 21:53:22] Status: HEALTHY | CPU: 2% | Memory: 21% | Disk: 1%</div><div class='log-entry log-healthy'>[2025-12-26 22:19:57] Status: HEALTHY | CPU: 4% | Memory: 21% | Disk: 1%</div><div class='log-entry log-healthy'>[2025-12-26 22:49:14] Status: HEALTHY | CPU: 2% | Memory: 21% | Disk: 1%</div><div class='log-entry log-healthy'>[2025-12-26 22:49:32] Status: HEALTHY | CPU: 0% | Memory: 21% | Disk: 1%</div>
+        </div>
+        
+        <footer>
+            <p>Opti-Monitor v1.0 - Server Monitoring for Healthcare</p>
+            <p>Built with 💙 for WhiteFire Eye Clinic</p>
+            <div class="author-badge">
+                Created by [WhiteFire] | DevOps Engineer
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
